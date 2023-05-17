@@ -1,0 +1,703 @@
+#include <limits.h>
+#include <string.h>
+
+#include "st_string.h"
+
+char origin_sprintf[100] = {0};
+char our_sprintf[100] = {0};
+
+
+#test strlen1
+char string[10] = "abshtkjdd";
+char string1[10] = "abshtkjdd";
+ck_assert_int_eq(strlen(string), st_strlen(string1));
+
+#test strlen2
+char string[10] = "";
+ck_assert_int_eq(strlen(string), st_strlen(string));
+
+#test strlen3
+char str[] = "Hello, world!";
+ck_assert_int_eq(strlen(str), st_strlen(str));
+
+#test strlen4
+char str[] =
+    "213145346758697808-9704=3524-1309876289403-5=6576=432=-31044253=60931 "
+    "21";
+ck_assert_int_eq(strlen(str), st_strlen(str));
+
+#test strlen5
+char str[] = "\0";
+ck_assert_int_eq(strlen(str), st_strlen(str));
+
+#test strlen6
+char str[] =
+    "I hate doing tests, it's not funny at all!!!!!!!!!!!!!!!!!!!!!!!!!";
+ck_assert_int_eq(strlen(str), st_strlen(str));
+
+#test strlen7
+char str[] = "          00000000           ......  ";
+ck_assert_int_eq(strlen(str), st_strlen(str));
+
+#test strlen8
+char str[] = "\n\n\n\n\n\n\n\n\nlololol\n\n\n\n\n";
+ck_assert_int_eq(strlen(str), st_strlen(str));
+
+#test strlen9
+char str[] = "\0\0\0\0\n";
+ck_assert_int_eq(strlen(str), st_strlen(str));
+
+#test strlen10
+char str[] = "\0test";
+ck_assert_int_eq(strlen(str), st_strlen(str));
+
+#test memchr1
+unsigned char src[15] = "1234567890";
+char* sym;
+char* st_sym;
+sym = memchr(src, '4', 10);
+st_sym = st_memchr(src, '4', 10);
+ck_assert_ptr_eq(sym, st_sym);
+
+#test memchr2
+unsigned char src[15] = "12345";
+char* sym;
+char* st_sym;
+sym = memchr(src, '6', 5);
+st_sym = st_memchr(src, '6', 5);
+ck_assert_ptr_eq(sym, st_sym);
+
+#test memchr3
+char str[] = "Hello, world!";
+int ch = ' ';
+st_size_t len = strlen(str);
+ck_assert_ptr_eq(memchr(str, ch, len), st_memchr(str, ch, len));
+
+#test memchr4
+char str[] = "Hello, world!";
+int ch = 101;
+st_size_t len = strlen(str);
+ck_assert_ptr_eq(memchr(str, ch, len), st_memchr(str, ch, len));
+
+#test memchr5
+char str[] = "Hello, world!";
+int ch = 65;
+st_size_t len = strlen(str);
+ck_assert_ptr_eq(memchr(str, ch, len), st_memchr(str, ch, len));
+
+#test memchr6
+char str[] = "Hello, world!";
+int ch = 'l';
+st_size_t len = 10;
+ck_assert_ptr_eq(memchr(str, ch, len), st_memchr(str, ch, len));
+
+#test memchr7
+char str[] = "69917020";
+int ch = 'g';
+st_size_t len = strlen(str);
+ck_assert_ptr_eq(memchr(str, ch, len), st_memchr(str, ch, len));
+
+#test memchr8
+char str[] = "69917020";
+int ch = '\0';
+st_size_t len = 9;
+ck_assert_ptr_eq(memchr(str, ch, len), st_memchr(str, ch, len));
+
+#test strrchr1
+char str[11] = "0163456769";
+char ch = '6';
+char* ach;
+char* st_ach;
+ach = strrchr(str, ch);
+st_ach = st_strrchr(str, ch);
+ck_assert_ptr_eq(ach, st_ach);
+
+#test strrchr2
+char str[11] = "0134579";
+char ch = '6';
+char* ach;
+char* st_ach;
+ach = strrchr(str, ch);
+st_ach = st_strrchr(str, ch);
+ck_assert_ptr_eq(ach, st_ach);
+
+#test strrchr3
+char s[] = "Hello, world!";
+int ch = '\0';
+ck_assert_pstr_eq(strrchr(s, ch), st_strrchr(s, ch));
+
+#test strrchr4
+char s[] = "Hello, world!";
+int ch = ',';
+ck_assert_pstr_eq(strrchr(s, ch), st_strrchr(s, ch));
+
+#test strrchr5
+char s[] = "Hello, world!";
+int ch = 7;
+ck_assert_pstr_eq(strrchr(s, ch), st_strrchr(s, ch));
+
+#test strrchr6
+char s[] = "Hello, world!";
+int ch = '0';
+ck_assert_pstr_eq(strrchr(s, ch), st_strrchr(s, ch));
+
+#test strncmp1
+char str1[] = "0163456769";
+char str2[] = "0163456769";
+st_size_t num = 7;
+int res, st_res;
+res = strncmp(str1, str2, num);
+st_res = st_strncmp(str1, str2, num);
+ck_assert_int_eq(res, st_res);
+
+#test strncmp2
+char str1[] = "0163098";
+char str2[] = "0163456769";
+st_size_t num = 7;
+int res, st_res;
+res = strncmp(str1, str2, num);
+st_res = st_strncmp(str1, str2, num);
+if (res < 0) {
+  res = -1;
+} else {
+  res = 1;
+}
+if (st_res < 0) {
+  st_res = -1;
+} else {
+  st_res = 1;
+}
+ck_assert_int_eq(res, st_res);
+
+#test strncmp3
+char str1[11] = "0163098";
+char str2[11] = "0163456";
+st_size_t num = 7;
+int res, st_res;
+res = strncmp(str1, str2, num);
+st_res = st_strncmp(str1, str2, num);
+if (res < 0) {
+  res = -1;
+} else {
+  res = 1;
+}
+if (st_res < 0) {
+  st_res = -1;
+} else {
+  st_res = 1;
+}
+ck_assert_int_eq(res, st_res);
+
+#test strncmp4
+char s1[] = "Hello, world!";
+char s2[] = "Hello, worldj";
+st_size_t n = 14;
+int n1 = strncmp(s1, s2, n);
+n1 = n1 > 0 ? 1 : n1 == 0 ? 0 : -1;
+int n2 = st_strncmp(s1, s2, n);
+n2 = n2 > 0 ? 1 : n2 == 0 ? 0 : -1;
+ck_assert_int_eq(n1, n2);
+
+#test strncmp5
+char s1[] = "";
+char s2[] = "";
+st_size_t n = 1;
+int n1 = strncmp(s1, s2, n);
+n1 = n1 > 0 ? 1 : n1 == 0 ? 0 : -1;
+int n2 = st_strncmp(s1, s2, n);
+n2 = n2 > 0 ? 1 : n2 == 0 ? 0 : -1;
+ck_assert_int_eq(n1, n2);
+
+#test strncmp6
+char s1[] = "A";
+char s2[] = "";
+st_size_t n = 1;
+int n1 = strncmp(s1, s2, n);
+n1 = n1 > 0 ? 1 : n1 == 0 ? 0 : -1;
+int n2 = st_strncmp(s1, s2, n);
+n2 = n2 > 0 ? 1 : n2 == 0 ? 0 : -1;
+ck_assert_int_eq(n1, n2);
+
+#test strncmp7
+char s1[] = "";
+char s2[] = "A";
+st_size_t n = 1;
+int n1 = strncmp(s1, s2, n);
+n1 = n1 > 0 ? 1 : n1 == 0 ? 0 : -1;
+int n2 = st_strncmp(s1, s2, n);
+n2 = n2 > 0 ? 1 : n2 == 0 ? 0 : -1;
+ck_assert_int_eq(n1, n2);
+
+#test strncmp8
+char s1[] = "";
+char s2[] = "";
+st_size_t n = 1;
+int n1 = strncmp(s1, s2, n);
+n1 = n1 > 0 ? 1 : n1 == 0 ? 0 : -1;
+int n2 = st_strncmp(s1, s2, n);
+n2 = n2 > 0 ? 1 : n2 == 0 ? 0 : -1;
+ck_assert_int_eq(n1, n2);
+
+#test strcmp1
+char str1[] = "0163456769";
+char str2[] = "0163456769";
+int res, st_res;
+res = strcmp(str1, str2);
+st_res = st_strcmp(str1, str2);
+ck_assert_int_eq(res, st_res);
+
+#test strcmp2
+char str1[] = "abc";
+char str2[] = "def";
+int res, st_res;
+res = strcmp(str1, str2);
+st_res = st_strcmp(str1, str2);
+if (res < 0) {
+  res = -1;
+} else {
+  res = 1;
+}
+if (st_res < 0) {
+  st_res = -1;
+} else {
+  st_res = 1;
+}
+ck_assert_int_eq(res, st_res);
+
+#test strcmp3
+char str1[] = "";
+char str2[] = "";
+int res, st_res;
+res = strcmp(str1, str2);
+st_res = st_strcmp(str1, str2);
+ck_assert_int_eq(res, st_res);
+
+#test strcmp_4
+char s1[] = "ABCDE";
+char s2[] = "ABCDE";
+int n1 = strcmp(s1, s2);
+n1 = n1 > 0 ? 1 : n1 == 0 ? 0 : -1;
+int n2 = st_strcmp(s1, s2);
+n2 = n2 > 0 ? 1 : n2 == 0 ? 0 : -1;
+ck_assert_int_eq(n1, n2);
+
+#test strcmp5
+char s1[] = "EDCAB";
+char s2[] = "ABCDE";
+int n1 = strcmp(s1, s2);
+n1 = n1 > 0 ? 1 : n1 == 0 ? 0 : -1;
+int n2 = st_strcmp(s1, s2);
+n2 = n2 > 0 ? 1 : n2 == 0 ? 0 : -1;
+ck_assert_int_eq(n1, n2);
+
+#test strcmp6
+char s1[] = "";
+char s2[] = "";
+int n1 = strcmp(s1, s2);
+n1 = n1 > 0 ? 1 : n1 == 0 ? 0 : -1;
+int n2 = st_strcmp(s1, s2);
+n2 = n2 > 0 ? 1 : n2 == 0 ? 0 : -1;
+ck_assert_int_eq(n1, n2);
+
+#test strcmp7
+char s1[] = "\0";
+char s2[] = "A";
+int n1 = strcmp(s1, s2);
+n1 = n1 > 0 ? 1 : n1 == 0 ? 0 : -1;
+int n2 = st_strcmp(s1, s2);
+n2 = n2 > 0 ? 1 : n2 == 0 ? 0 : -1;
+ck_assert_int_eq(n1, n2);
+
+#test strcmp8
+char s1[] = "A";
+char s2[] = "\0";
+int n1 = strcmp(s1, s2);
+n1 = n1 > 0 ? 1 : n1 == 0 ? 0 : -1;
+int n2 = st_strcmp(s1, s2);
+n2 = n2 > 0 ? 1 : n2 == 0 ? 0 : -1;
+ck_assert_int_eq(n1, n2);
+
+#test strcmp9
+char s1[] = "\0";
+char s2[] = "\0";
+int n1 = strcmp(s1, s2);
+n1 = n1 > 0 ? 1 : n1 == 0 ? 0 : -1;
+int n2 = st_strcmp(s1, s2);
+n2 = n2 > 0 ? 1 : n2 == 0 ? 0 : -1;
+ck_assert_int_eq(n1, n2);
+
+#test strcmp10
+char s1[] = "text \0 text";
+char s2[] = "text";
+int n1 = strcmp(s1, s2);
+n1 = n1 > 0 ? 1 : n1 == 0 ? 0 : -1;
+int n2 = st_strcmp(s1, s2);
+n2 = n2 > 0 ? 1 : n2 == 0 ? 0 : -1;
+ck_assert_int_eq(n1, n2);
+
+#test memset1
+char src[15] = "1234567890";
+char st_src[15] = "1234567890";
+memset(src, '1', 10);
+st_memset(st_src, '1', 10);
+ck_assert_str_eq(src, st_src);
+
+#test memset2
+char s1[] = "";
+char s2[] = "";
+int ch = '\0';
+st_size_t n = 0;
+ck_assert_str_eq(memset(s1, ch, n), st_memset(s2, ch, n));
+
+#test memset3
+char s1[] = "ABCD";
+char s2[] = "ABCD";
+int ch = '\0';
+st_size_t n = 5;
+ck_assert_str_eq(memset(s1, ch, n), st_memset(s2, ch, n));
+
+#test memset4
+char s1[] = "Hello, world!";
+char s2[] = "Hello, world!";
+int ch = 77;
+st_size_t n = 7;
+ck_assert_str_eq(memset(s1, ch, n), st_memset(s2, ch, n));
+
+#test memmove1
+char src[10] = "1234567890";
+char result[10] = {0};
+char st_result[10] = {0};
+memmove(&result[4], &src[3], 3);
+st_memmove(&st_result[4], &src[3], 3);
+ck_assert_str_eq(result, st_result);
+
+#test memmove2
+char s1[] = "Hello, world!";
+char s2[] = "Hello, world!";
+char s3[] = "Good";
+st_size_t n = 4;
+memmove(s1, s3, n);
+st_memmove(s2, s3, n);
+ck_assert_mem_eq(s1, s2, n);
+
+#test memmove3
+char s1[] = "Hello, world!";
+char s2[] = "Hello, world!";
+char s3[] = "";
+st_size_t n = 0;
+memmove(s1, s3, n);
+st_memmove(s2, s3, n);
+ck_assert_mem_eq(s1, s2, n);
+
+#test memmove4
+char s1[] = "asdfgh: sdfsadfkjni_ sdfsdf";
+char s2[] = "asdfgh: sdfsadfkjni_ sdfsdf";
+st_size_t n = 6;
+memmove(s1, s1, n);
+st_memmove(s2, s2, n);
+ck_assert_mem_eq(s1, s2, n);
+
+#test memmove5
+char s1[] = "abababababab";
+char s2[] = "abababababab";
+char s3[] = "\0";
+st_size_t n = 1;
+memmove(s1, s3, n);
+st_memmove(s2, s3, n);
+ck_assert_mem_eq(s1, s2, n);
+
+#test memmove6
+char s1[] = "           ";
+char s2[] = "           ";
+char s3[] = "new";
+st_size_t n = strlen(s3);
+memmove(s1, s3, n);
+st_memmove(s2, s3, n);
+ck_assert_mem_eq(s1, s2, n);
+
+#test memmove7
+char s1[] = "699\017020";
+char s2[] = "699\017020";
+char s3[] = "abc";
+st_size_t n = 3;
+memmove(s1, s3, n);
+st_memmove(s2, s3, n);
+ck_assert_mem_eq(s1, s2, n);
+
+#test memmove8
+char s1[] = "699\017020";
+char s2[] = "699\017020";
+char s3[] = "abc";
+st_size_t n = 4;
+memmove(s1, s3, n);
+st_memmove(s2, s3, n);
+ck_assert_mem_eq(s1, s2, n);
+
+#test memcpy1
+char src[10] = "123456";
+char dst[10] = "";
+char st_dst[10] = "";
+memcpy(dst, src, 6);
+st_memcpy(st_dst, src, 6);
+ck_assert_str_eq(dst, st_dst);
+
+#test memcmp1
+char s1[] = "Hello, world!";
+char s2[] = "Hello, world!";
+st_size_t n = 7;
+int n1 = memcmp(s1, s2, n);
+n1 = n1 > 0 ? 1 : n1 == 0 ? 0 : -1;
+int n2 = st_memcmp(s1, s2, n);
+n2 = n2 > 0 ? 1 : n2 == 0 ? 0 : -1;
+ck_assert_int_eq(n1, n2);
+
+#test memcmp2
+char src[15] = "1234567890";
+char dst[15] = "1234567890";
+int res, st_res;
+res = memcmp(src, dst, 10);
+st_res = st_memcmp(src, dst, 10);
+ck_assert_int_eq(res, st_res);
+
+#test memcmp3
+char src[] = "1234567890";
+char dst[] = "1234567";
+int res, st_res;
+res = memcmp(src, dst, 10);
+st_res = st_memcmp(src, dst, 10);
+int status = 0;
+if (st_res > 0 && res > 0) {
+  status = 1;
+} else if (st_res < 0 && res < 0) {
+  status = 1;
+}
+ck_assert_int_gt(status, 0);
+
+#test memcmp5
+char src[] = "str";
+char dst[] = "dst";
+int res, st_res;
+res = memcmp(src, dst, 0);
+st_res = st_memcmp(src, dst, 0);
+ck_assert_int_eq(res, st_res);
+
+#test strchr1
+char str[11] = "0123456789";
+int ch = '6';
+char* ach;
+char* st_ach;
+ach = strchr(str, ch);
+st_ach = st_strchr(str, ch);
+ck_assert_ptr_eq(ach, st_ach);
+
+#test strchr2
+char str[11] = "012345789";
+int ch = '6';
+char* ach;
+char* st_ach;
+ach = strchr(str, ch);
+st_ach = st_strchr(str, ch);
+ck_assert_ptr_eq(ach, st_ach);
+
+#test strncat1
+char src1[10] = "000";
+char st_src2[10] = "000";
+char app[10] = "12345";
+strncat(src1, app, 3);
+st_strncat(st_src2, app, 3);
+ck_assert_str_eq(src1, st_src2);
+
+#test strncat2
+char src1[10] = "000";
+char st_src2[10] = "000";
+char app[10] = "12345";
+strncat(src1, app, 7);
+st_strncat(st_src2, app, 7);
+ck_assert_str_eq(src1, st_src2);
+
+#test strcat1
+char app[1024] = "first line";
+char dst[1024] = "second line";
+char st_dst[1024] = "second line";
+strcat(dst, app);
+st_strcat(st_dst, app);
+ck_assert_str_eq(dst, st_dst);
+
+#test strcat2
+char app[50] = "first line";
+char dst[50] = "second line";
+char st_dst[50] = "second line";
+strcat(dst, app);
+st_strcat(st_dst, app);
+int st_res = 0;
+int origin_res = 0;
+if (*(st_dst + st_strlen(st_dst)) == '\0') {
+  st_res = 1;
+}
+if ((*(dst + strlen(dst)) == '\0')) {
+  origin_res = 1;
+}
+ck_assert_int_eq(st_res, origin_res);
+
+#test strcat3
+char dest1[50] = {0};
+char dest2[50] = {0};
+memset(dest1, 'X', 49);
+memset(dest2, 'X', 49);
+dest1[10] = 0;
+dest2[10] = 0;
+char src[] = "hell";
+ck_assert_pstr_eq(strcat(dest1, src), st_strcat(dest2, src));
+
+#test strcpy1
+char src[1024] = "первая строка\0вторая строка";
+char dst[1024] = "";
+char st_dst[1024] = "";
+strcpy(dst, src);
+st_strcpy(st_dst, src);
+ck_assert_str_eq(dst, st_dst);
+
+#test strncpy1
+char src[] = "12345";
+char dst[] = "1111111111";
+char st_dst[] = "1111111111";
+strncpy(dst, src, 3);
+st_strncpy(st_dst, src, 3);
+ck_assert_str_eq(dst, st_dst);
+
+#test strcspn1
+char str[10] = "0123456789";
+char sym[10] = "9876";
+ck_assert_int_eq(strcspn(str, sym), st_strcspn(str, sym));
+
+#test strpbrk1
+char str[11] = "0123456789";
+char sym[10] = "369";
+ck_assert_ptr_eq(strpbrk(str, sym), st_strpbrk(str, sym));
+
+#test strspn1
+char str[11] = "0123456789";
+char sym[10] = "210";
+// strspn(str,sym);
+ck_assert_int_eq(strspn(str, sym), st_strspn(str, sym));
+
+#test strstr1
+char* str1 = "0123456789";
+char* str2 = "345";
+char* result;
+char* st_result;
+result = strstr(str1, str2);
+st_result = st_strstr(str1, str2);
+ck_assert_ptr_eq(result, st_result);
+
+#test strstr2
+char* str1 = "0123456789";
+char* str2 = "abc";
+char* st_result;
+st_result = st_strstr(str1, str2);
+ck_assert_ptr_null(st_result);
+
+#test to_upper1
+char* str = "AbCdE";
+char* result = st_to_upper(str);
+ck_assert_str_eq("ABCDE", result);
+if (result) {
+  free(result);
+}
+
+#test to_upper2
+char* str = st_NULL;
+char* result = st_to_upper(str);
+ck_assert_ptr_null(result);
+if (result) {
+  free(result);
+}
+
+#test st_to_lower1
+char* str = "AbCdE";
+char* result = st_to_lower(str);
+ck_assert_str_eq("abcde", result);
+if (result) {
+  free(result);
+}
+
+#test st_to_lower2
+char* str = st_NULL;
+char* result = st_to_lower(str);
+ck_assert_ptr_null(result);
+if (result) {
+  free(result);
+}
+
+#test st_insert1
+char src[100] = "aaabbb";
+char str[100] = " ";
+st_size_t start_index = 3;
+char result[100] = {0};
+char* pt = &result[0];
+pt = st_insert(src, str, start_index);
+ck_assert_str_eq("aaa bbb", pt);
+if (pt) {
+  free(pt);
+}
+
+#test strtok1
+char str_strtok1[] = "one/two/three(four)five";
+char delim1[] = "/()";
+char str_strtok2[] = "one/two/three(four)five";
+char delim2[] = "/()";
+char* my_strtok = st_strtok(str_strtok1, delim1);
+char* origin_strtok = strtok(str_strtok2, delim2);
+while (my_strtok != st_NULL) {
+  ck_assert_str_eq(my_strtok, origin_strtok);
+  my_strtok = st_strtok(st_NULL, delim1);
+  origin_strtok = strtok(st_NULL, delim2);
+}
+
+#test trim1
+char* trimmed_str;
+char* str_to_trim = " \n   Hello, world!  !\n";
+trimmed_str = st_trim(str_to_trim, " H!\nd");
+if (trimmed_str) {
+  ck_assert_str_eq(trimmed_str, "ello, worl");
+  free(trimmed_str);
+}
+
+#test trim2
+char* empty_str = "";
+char* trimmed_str;
+trimmed_str = st_trim(empty_str, st_NULL);
+if (trimmed_str) {
+  ck_assert_str_eq(trimmed_str, "");
+  free(trimmed_str);
+}
+
+#test trim3
+char* trimmed_str;
+char* empty_str = "";
+trimmed_str = st_trim(empty_str, " \n\0");
+if (trimmed_str) {
+  ck_assert_str_eq(trimmed_str, "");
+  free(trimmed_str);
+}
+
+#test trim5
+char* trimmed_str;
+char* empty_format = "";
+trimmed_str = st_trim(st_NULL, empty_format);
+ck_assert(trimmed_str == st_NULL);
+
+#test trim6
+char* trimmed_str;
+char* str_to_trim2 = "xxx Hello, world! xxx ---";
+char* format_str = "x -";
+trimmed_str = st_trim(str_to_trim2, format_str);
+if (trimmed_str) {
+  ck_assert_str_eq(trimmed_str, "Hello, world!");
+  free(trimmed_str);
+}
+
+#test strerror1
+for (int i = 0; i < 200; i++) {
+  ck_assert_str_eq(st_strerror(i), strerror(i));
+}

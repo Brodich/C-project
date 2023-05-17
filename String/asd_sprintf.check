@@ -1,0 +1,1396 @@
+
+// // обработка %d
+#test sprintf_d_1
+char format_str[100] = "abcde%d| zxcv";
+int number = 214;
+int origin_returned = sprintf(origin_sprintf, format_str, number);
+int our_returned = st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+ck_assert_int_eq(origin_returned, our_returned);
+
+#test sprintf_d_2
+char format_str[100] = "abcde%5d| zxcv";
+int number = 214;
+int origin_returned  = sprintf(origin_sprintf, format_str, number);
+int our_returned = st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+ck_assert_int_eq(origin_returned, our_returned);
+
+#test sprintf_d_3
+char format_str[100] = "abcde%.5d| zxcv";
+int number = 214;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_4
+char format_str[100] = "abcde%8.5d| zxcv";
+int number = 214;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_5
+char format_str[100] = "abcde%+8.5d| zxcv";
+int number = 214;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_6
+char format_str[100] = "abcde%+-8.5d| zxcv";
+int number = 214;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_7
+char format_str[100] = "abcde% +8.5d| zxcv";
+int number = 214;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_8
+char format_str[100] = "abcde%0+8.5d| zxcv";
+int number = 214;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_9
+char format_str[100] = "abcde%0-+8.5d| zxcv";
+int number = 214;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_10
+char format_str[100] = "abcde%.d| zxcv";
+int number = 214;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_11
+char format_str[100] = "abcde%#d| zxcv";
+int number = 214;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_12
+char format_str[100] = "abcde%#0-+ 9.5d| zxcv";
+int number = 214;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_13
+char format_str[100] = "abcde%#0-+ 9.5d| zxcv";
+int number = INT_MIN;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_14
+char format_str[100] = "abcde%#0-+ 9.5d| zxcv";
+int number = UINT_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_15
+char format_str[100] = "abcde%#0-+ 9.5hd| zxcv";
+int number = INT_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_16
+char format_str[100] = "abcde%#0-+ 9.5hd| zxcv";
+int number = SHRT_MIN;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_17
+char format_str[100] = "abcde%#0-+ 9.5ld| zxcv";
+long int number = INT_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_18
+char format_str[100] = "abcde%#0-+ 9.5ld| zxcv";
+long int number = INT_MIN;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_19
+char format_str[100] = "%#0-+ 9.5ld| zxcv";
+long int number = INT_MIN;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_20
+char format_str[100] = "%#0-+ 9.5ld";
+long int number = INT_MIN;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_21
+char format_str[100] = "f%ld";
+long int number = INT_MIN;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_22
+char format_str[100] = "%ld";
+long int number = INT_MIN;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_23
+char format_str[100] = "%d";
+long int number = INT_MIN;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_d_24
+int d = 5;
+st_sprintf(our_sprintf, "%d", d);
+sprintf(origin_sprintf, "%d", d);
+ck_assert_str_eq(origin_sprintf, our_sprintf);
+
+// обработка %i
+#test sprintf_i_1
+char format_str[100] = "abcde%#0-+ 9.5i| zxcv";
+int number = INT_MAX;
+int origin_returned = sprintf(origin_sprintf, format_str, number);
+int our_returned = st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+ck_assert_int_eq(origin_returned, our_returned);
+
+#test sprintf_i_2
+char format_str[100] = "abcde%#0-+ 9.5i| zxcv";
+int number = INT_MIN;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_i_3
+char format_str[100] = "abcde%#0-+ 9.5i| zxcv";
+int number = UINT_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_i_4
+char format_str[100] = "abcde%#0-+ 9.5li| zxcv";
+long int number = INT_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_i_5
+char format_str[100] = "abcde%#0-+ 9.5li| zxcv";
+long int number = INT_MIN;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_i_6
+char format_str[100] = "abcde%#0-+ 9.5hi| zxcv";
+long int number = LONG_MIN;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_i_7
+char format_str[100] = "abcde%#0-+ 5.10hi| zxcv";
+long int number = LONG_MIN;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+
+// обработка %u
+#test sprintf_u_1
+char format_str[100] = "abcde%#0-+ 4.9lu| zxcv";
+unsigned long int number = UINT_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_u_2
+char format_str[100] = "abcde%4.9lu| zxcv";
+unsigned long int number = UINT_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_u_3
+char format_str[100] = "abcde%4.9u| zxcv";
+unsigned int number = UINT_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_u_4
+char format_str[100] = "abcde%# 4.9u| zxcv";
+unsigned int number = 100;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_u_5
+char format_str[100] = "abcde%# 4.9u| zxcv";
+unsigned int number = 0;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+// обработка %c
+#test sprintf_c_1
+char format_str[100] = "abcde%c| zxcv";
+char number = 'a';
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_c_2
+char format_str[100] = "abcde%+c| zxcv";
+char number = 'h';
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_c_3
+char format_str[100] = "abcde%-c| zxcv";
+char number = 'h';
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_c_4
+char format_str[100] = "abcde% c| zxcv";
+char number = 'g';
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_c_5
+char format_str[100] = "abcde%10c| zxcv";
+char number = 'z';
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_c_6
+char format_str[100] = "abcde%.10c| zxcv";
+char number = 'z';
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_c_7
+char format_str[100] = "abcde%-+0 #10.10c| zxcv";
+char number = 'a';
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_c_8
+char format_str[100] = "abcde%-+0 #10.10c| zxcv";
+char number = SCHAR_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_c_9
+char format_str[100] = "abcde%-+0 #10.10c| zxcv";
+char number = UCHAR_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_c_10
+char format_str[100] = "abcde%-+0 #10.10c| zxcv";
+char number = CHAR_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+// обработка %x
+#test sprintf_x_1
+char format_str[100] = "abcde%x| zxcv";
+unsigned int number = 999;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_x_2
+char format_str[100] = "abcde%10.10x| zxcv";
+unsigned int number = 999;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_x_3
+char format_str[100] = "abcde%-+ #05.8x| zxcv";
+unsigned int number = 999;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_x_4
+char format_str[100] = "abcde%x| zxcv";
+unsigned int number = UINT_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_x_5
+char format_str[100] = "abcde%-+ #05.8x| zxcv";
+unsigned int number = INT_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_X_6
+char format_str[100] = "abcde%-+ #05.8X| zxcv";
+unsigned int number = INT_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_X_7
+char format_str[100] = "abcde%-+ #010X| zxcv";
+unsigned int number = UINT_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_X_8
+char format_str[100] = "abcde%-+ #010X| zxcv";
+unsigned int number = 11;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_X_9
+char format_str[100] = "abcde%-+ #010X| zxcv";
+unsigned int number = 10;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_X_10
+char format_str[100] = "abcde%-+ #010X| zxcv";
+unsigned int number = 12;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_X_11
+char format_str[100] = "abcde%-+ #010X| zxcv";
+unsigned int number = 13;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_X_12
+char format_str[100] = "abcde%-+ #010X| zxcv";
+unsigned int number = 14;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_x_13
+char format_str[100] = "abcde%-+ #05.8x| zxcv";
+unsigned int number = 12;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_x_14
+char format_str[100] = "abcde%-+ #05.8x| zxcv";
+unsigned int number = 11;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_x_15
+char format_str[100] = "abcde%-+ #05.8x| zxcv";
+unsigned int number = 10;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_x_16
+char format_str[100] = "abcde%-+ #05.8X| zxcv";
+unsigned int number = 0;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_x_17
+char format_str[100] = "abcde%-+ #05.8x| zxcv";
+unsigned int number = 0;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_s_1
+char format_str[100] = "abcde%s| zxcv";
+char number[100] = "pt_str_number";
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_s_2
+char format_str[100] = "abcde%10s| zxcv";
+char number[100] = "pt_str_number";
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_s_3
+char format_str[100] = "abcde%.10s| zxcv";
+char number[100] = "pt_str_number";
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_s_4
+char format_str[100] = "abcde%10.10s| zxcv";
+char number[100] = "pt_str_number";
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_s_5
+char format_str[100] = "abcde%#+-0 10.10s| zxcv";
+char number[100] = "pt_str_number";
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_s_6
+char format_str[100] = "abcde%#+-0 10hs| zxcv";
+char number[100] = "pt_str_number";
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_s_7
+char format_str[100] = "abcde%#+-0 .10hs| zxcv";
+char number[100] = "pt_str_number";
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_s_8
+char format_str[100] = "abcde%#+-0 10.5hs| zxcv";
+char number[100] = "pt_str_number";
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_s_9
+char format_str[100] = "abcde%#+-0 5.10hs| zxcv";
+char number[100] = "pt_str_number";
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_s_10
+char format_str[100] = "abcde%#+-0 2.10s| zxcv";
+char number[100] = "pt_str_number";
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_s_11
+char format_str[100] = "abcde%#+-0 10.2s| zxcv";
+char number[100] = "pt_str_number";
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+// обработка %o
+#test sprintf_o_1
+char format_str[100] = "abcde%#+-0 .10o| zxcv";
+unsigned int number = INT_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_o_2
+char format_str[100] = "abcde%#+-0 10o| zxcv";
+unsigned int number = UINT_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_o_3
+char format_str[100] = "abcde%#+-0 10.10o| zxcv";
+unsigned long int number = LONG_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_o_4
+char format_str[100] = "abcde%#+-0 10.10o| zxcv";
+unsigned long int number = ULONG_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_o_5
+char format_str[100] = "abcde%#+-0 10.10lo| zxcv";
+unsigned long int number = LONG_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_o_6
+char format_str[100] = "abcde%#+-0 10.10lo| zxcv";
+unsigned long int number = ULONG_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_o_7
+char format_str[100] = "abcde%#+-0 ho| zxcv";
+unsigned long int number = ULONG_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_o_8
+char format_str[100] = "abcde%#+-0 10ho| zxcv";
+unsigned long int number = ULONG_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_o_9
+char format_str[100] = "abcde%#+-0 .10ho| zxcv";
+unsigned long int number = ULONG_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_o_10
+char format_str[100] = "abcde%#+-0 10.5ho| zxcv";
+unsigned long int number = ULONG_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_o_11
+char format_str[100] = "abcde%#+-0 5.10ho| zxcv";
+unsigned long int number = ULONG_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_o_12
+char format_str[100] = "abcde%#+-0 5.10lo| zxcv";
+unsigned long int number = ULONG_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_o_13
+char format_str[100] = "abcde%#+-0 10.5lo| zxcv";
+unsigned long int number = ULONG_MAX;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_o_14
+char format_str[100] = "abcde%#+-0 10.5lo| zxcv";
+long int number = LONG_MIN;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_o_15
+char format_str[100] = "abcde%#+-0 lo| zxcv";
+long int number = 0;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+// обработка %n
+#test sprintf_n_1
+char *format_str = "Test %n Test";
+int valn1 = 0, valn2 = 0;
+ck_assert_int_eq(sprintf(origin_sprintf, format_str, &valn1),
+                st_sprintf(our_sprintf, format_str, &valn2));
+ck_assert_pstr_eq(our_sprintf, origin_sprintf);
+ck_assert_int_eq(valn1, valn2);
+
+
+// #test sprintf_n_2
+// char str1[100] = {0};
+// char str2[100]= {0};
+// char *str3 = "Test  T%nest %n";
+// int valn1 = 0, valn2 = 0, valn3 = 0, valn4 = 0;
+// ck_assert_int_eq(sprintf(str1, str3,  &valn1,  &valn3),
+//                  st_sprintf(str2, str3, &valn2, &valn4));
+// ck_assert_pstr_eq(str1, str2);
+// ck_assert_int_eq(valn1, valn2);
+// ck_assert_int_eq(valn3, valn4);
+
+
+// обработка %p
+#test sprintf_p_1
+char format_str[100] = "abcde%p| zxcv";
+char number[100] = "13";
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_p_2
+char format_str[100] = "abcde%p| zxcv";
+int number = 13;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_p_3
+char str1[100] = "";
+char str2[100] = "";
+char* str3 = "Test %p Test";
+char* val = "0p32";
+ck_assert_int_eq(sprintf(str1, str3, val), st_sprintf(str2, str3, val));
+ck_assert_pstr_eq(str1, str2);
+
+// #test sprintf_p_4
+// char str1[100];
+// char str2[100];
+// char* str3 = "%p Test %p Test %p";
+// char* val = "0p7a4";
+// char* val2 = "0p91ba123f";
+// char* val3 = "0p3123";
+// ck_assert_int_eq(sprintf(str1, str3, val, val2, val3),
+//                 st_sprintf(str2, str3, val, val2, val3));
+// ck_assert_pstr_eq(str1, str2);
+
+
+#test sprintf_test_d_30
+char st[100] = {0};
+char str2[100] = {0};
+int d = 5;
+st_sprintf(st, "%d", d);
+sprintf(str2, "%d", d);
+ck_assert_str_eq(st, str2);
+
+
+// обработка %f
+#test sprintf_f_1
+char format_str[100] = "%f";
+float number = .1;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_2
+char format_str[100] = "%f";
+float number = 2.347;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_3
+char format_str[100] = "%f";
+float number = 2.347;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_4
+char format_str[100] = "abcde%.15f";
+float number = 9999.9;
+sprintf(origin_sprintf, format_str, number);
+// printf("origin number =|%s|\n", origin_sprintf);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_5
+char format_str[100] = "%f| zxcv";
+float number = 2.347;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_6
+char format_str[100] = "%.12f| zxcv";
+double number = 0.00000006;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_7
+char format_str[100] = "%f| zxcv";
+double number = -0.0;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_8
+char format_str[100] = "%f| zxcv";
+double number = -0.0;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_9
+char format_str[100] = "%f";
+double number = -23.23423412;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_10
+char format_str[100] = "%f";
+double number = 23.23423412;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_11
+char format_str[100] = "%f";
+double number = 324323423.234234121235;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_12
+char format_str[100] = "%f";
+double number = -324323423.234234121235;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_13
+char format_str[100] = "abc %# +f|boob";
+double number = -324323423.234234121235;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_14
+char format_str[100] = "abc %# +-0f|boob";
+double number = -324323423.234234121235;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_15
+char format_str[100] = "%# +-0f|boob";
+double number = -324323423.234234121235;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_16
+char format_str[100] = "abc %# +-0f";
+double number = -324323423.234234121235;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_17
+char format_str[100] = "abc %# +-010f|boob";
+double number = -324323423.234234121235;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_18
+char format_str[100] = "abc %# +-0.10f|boob";
+double number = -324323423.234234121235;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_19
+char format_str[100] = "abc %# +-010.5f|boob";
+double number = -324323423.234234121235;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_20
+char format_str[100] = "abc %# +-05.10f|boob";
+double number = -324323423.234234121235;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_21
+char format_str[100] = "abc %# +-0.13f|boob";
+double number = -324323423.234565647484;
+sprintf(origin_sprintf, format_str, number);
+// printf("origin number =|%s|\n", origin_sprintf);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_22
+char format_str[100] = "abc %# +-0.12f|boob";
+float number = -324323423.234565647484;
+sprintf(origin_sprintf, format_str, number);
+// printf("origin number =|%s|\n", origin_sprintf);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_23
+char format_str[100] = "abcde%.17f| zxcv";
+float number = 4.1;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_24
+char format_str[100] = "abc %# +-020f|boob";
+double number = 1.0 / 0.0;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_25
+char format_str[100] = "abc %# +-20f|boob";
+double number = -1.0 / 0.0;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_26
+char format_str[100] = "abc %# +-.10f|boob";
+double number = -1.0 / 0.0;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_27
+char format_str[100] = "abc %# +-20.10f|boob";
+float number = -1.0 / 0.0;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_28
+char format_str[100] = "abc %# +020f|boob";
+double number = -1.0 / 0.0;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_29
+char format_str[100] = "abc %# +-020.10f|boob";
+double number = 1.2;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_30
+char format_str[100] = "%f";
+float number = 2.347;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_31
+char format_str[100] = "abc %0+f|boob";
+float number = 2.347;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_32
+char format_str[100] = "abc %*f|boob";
+float number = 2.347;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_33
+char format_str[100] = "abc %f|boob";
+float number = 0.999999999999999;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_34
+char format_str[100] = "abc %f|boob";
+float number = 0.999999999999999;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+
+#test sprintf_f_35
+char format_str[100] = "abc %f|boob";
+float number = 0.999999999999999;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+
+#test sprintf_f_36
+char format_str[100] = "abc %f|boob";
+float number = 0.999999999999999;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_37
+char format_str[100] = "abc %f|boob";
+float number = 1.0 / 0.0;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_38
+char format_str[100] = "abc %f|boob";
+float number = 401.99999999999;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_39
+char format_str[100] = "abc %f|boob";
+float number = 9999999999.999999999999999999;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_40
+char format_str[100] = "abc %f|boob";
+float number = 6666666.66666666666;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_41
+char format_str[100] = "abc %f|boob";
+float number = 77.77;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_42
+char format_str[100] = "abc %-020.5f|boob";
+float number = 77336677.7766699988211;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_43
+char format_str[100] = "abc %-020.20f|boob";
+float number = 77336677.7766699988211;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+
+#test sprintf_f_44
+char format_str[100] = "abc %20.5f|boob";
+float number = 201.555555;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_45
+char format_str[100] = "abc %20.5f|boob";
+float number = 0.555555;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_46
+char format_str[100] = "abc %20.5f|boob";
+float number = 201.555555;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_47
+char format_str[100] = "abc %20.5f|boob";
+double number = 0.555555;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_48
+char format_str[100] = "abc %20.5f|boob";
+double number = 201.555555;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_49
+char format_str[100] = "abc %20.4f|boob";
+double number = -0.555555;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_50
+char format_str[100] = "abc %20.4f|boob";
+double number = -201.555555;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_51
+char format_str[100] = "abc %f|boob";
+double number = -1.0 / 0.0;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_52
+char format_str[100] = "abc %f|boob";
+double number = 1.0 / 0.0;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_53
+char format_str[100] = "abc %-f|boob";
+double number = -1.0 / 0.0;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_54
+char format_str[100] = "abc %-f|boob";
+double number = 1.0 / 0.0;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_55
+char format_str[100] = "abc %- 020f|boob";
+double number = -1.0 / 0.0;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_f_56
+char format_str[100] = "abc %020f|boob";
+double number = 1.0 / 0.0;
+int width = 10;
+sprintf(origin_sprintf, format_str, number, width);
+st_sprintf(our_sprintf, format_str, number, width);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+
+// обработка bizzare test
+#test sprintf_specif_test_1
+char st_string[512];
+char origin[512];
+char format[] = "%% %c";
+char cymbol = 'z';
+st_sprintf(st_string, format, cymbol);
+sprintf(origin, format, cymbol);
+ck_assert_str_eq(st_string, origin);
+
+#test sprintf_specif_test_2
+char str1[512];
+char origin[512];
+char format[] = "asd%% %c";
+char cymbol = 'z';
+sprintf(origin, format, cymbol);
+st_sprintf(str1, format, cymbol);
+ck_assert_str_eq(str1, origin);
+
+#test sprintf_specif_test_3
+char str1[512];
+char origin[512];
+char format[] = "%%asd";
+char cymbol = 'z';
+sprintf(origin, format, cymbol);
+st_sprintf(str1, format, cymbol);
+ck_assert_str_eq(str1, origin);
+
+#test sprintf_e_1
+char format_str[100] = "%e";
+double number = 0.0067;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_e_2
+char format_str[100] = "%e";
+double number = 1.001231231;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_e_3
+char format_str[100] = "%e";
+double number = 1123231.1111111112311111111;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_e_4
+char format_str[100] = "123 %e asd";
+double number = 12313231.11;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_e_5
+char format_str[100] = "123 %e asd";
+double number = 11.11231231231231;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_e_6
+char format_str[100] = "123 %e asd";
+double number = 0.002312331;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_e_7
+char format_str[100] = "%+#5.3e";
+double number = 0.0001123123123231;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_e_8
+char format_str[100] = "%.2e";
+double number = 2345576.3231;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_e_9
+char format_str[100] = "%.10e";
+double number = 2345576.3231123123;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_e_10
+char format_str[100] = "% e";
+double number = 2345576.3275645687;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_e_11
+char format_str[100] = "%e";
+double number = 21212376.3231111111111123123;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_e_12
+char format_str[100] = "%e";
+double number = 999.99999;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_e_13
+char format_str[100] = "%e";
+double number = 999.912398;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_e_14
+char format_str[100] = "%e";
+double number = 153412;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_e_15
+char format_str[100] = "%-e";
+double number = 0;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_e_16
+char format_str[100] = "% .2e";
+double number = -0;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_e_17
+char format_str[100] = "%9e";
+double number = 12.12;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_e_18
+char format_str[100] = "%.10e";
+double number = 12.12;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_e_19
+char format_str[100] = "%10.10e";
+double number = 12.12;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_E_1
+char format_str[100] = "%E";
+double number = 0.0067;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_E_2
+char format_str[100] = "%E";
+double number = 1.001231231;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_E_3
+char format_str[100] = "%E";
+double number = 1123231.1111111112311111111;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_E_4
+char format_str[100] = "123 %E asd";
+double number = 12313231.11;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_E_5
+char format_str[100] = "123 %E asd";
+double number = 11.11231231231231;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_E_6
+char format_str[100] = "123 %E asd";
+double number = 0.002312331;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_E_7
+char format_str[100] = "%+#5.3E";
+double number = 0.0001123123123231;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_E_8
+char format_str[100] = "%.2E";
+double number = 2345576.3231;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_E_9
+char format_str[100] = "%.10E";
+double number = 2345576.3231123123;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_E_10
+char format_str[100] = "% E";
+double number = 2345576.3275645687;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_E_11
+char format_str[100] = "%E";
+double number = 21212376.3231111111111123123;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_E_12
+char format_str[100] = "%E";
+double number = 999.99999;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_E_13
+char format_str[100] = "%E";
+double number = 999.912398;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_E_14
+char format_str[100] = "%E";
+double number = -153412;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_E_15
+char format_str[100] = "%E";
+double number = 0;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
+
+#test sprintf_E_16
+char format_str[100] = "% .2E";
+double number = -0;
+sprintf(origin_sprintf, format_str, number);
+st_sprintf(our_sprintf, format_str, number);
+ck_assert_str_eq(our_sprintf, origin_sprintf);
