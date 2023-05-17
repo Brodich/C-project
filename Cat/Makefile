@@ -2,19 +2,19 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror 
 
-all: clang s21_cat
+all: clang st_cat
 
-s21_cat: s21_cat.c
-	$(CC) $(CFLAGS) s21_cat.c -o s21_cat
+st_cat: st_cat.c
+	$(CC) $(CFLAGS) st_cat.c -o st_cat
 
-test: s21_cat
-	cp ./s21_cat tests/./s21_cat
+tests: st_cat
+	cp ./st_cat tests/./st_cat
 	bash tests/test_func_cat.sh
 
-clang: s21_cat.c
-	clang-format -style=Google -i s21_cat.c
+clang: st_cat.c
+	clang-format -style=Google -i st_cat.c
 
 gitpush: 
-	git add Makefile s21_cat.c
-	git commit -m Makefile s21_cat.c
+	git add Makefile st_cat.c
+	git commit -m Makefile st_cat.c
 	git push -u origin develop
