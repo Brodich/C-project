@@ -1,0 +1,180 @@
+#test st_int_to_dec_1
+st_decimal origin;
+   int code_check = 0; int code =0;
+  // src1 = 2;
+
+  int num = 2;
+
+  st_decimal result; code = st_from_int_to_decimal(num, &result);
+origin.bits[0] = 0b00000000000000000000000000000010;
+  origin.bits[1] = 0b00000000000000000000000000000000;
+  origin.bits[2] = 0b00000000000000000000000000000000;
+  origin.bits[3] = 0b00000000000000000000000000000000;
+  int check = st_is_equal(origin, result);
+    ck_assert_int_eq(1, check);
+    ck_assert_int_eq(code_check, code);
+#test st_int_to_dec_2
+  st_decimal origin;
+   int code_check = 0; int code =0;
+  // src1 = -2;
+
+  int num = -2;
+
+  st_decimal result; code = st_from_int_to_decimal(num, &result);
+  origin.bits[0] = 0b00000000000000000000000000000010;
+  origin.bits[1] = 0b00000000000000000000000000000000;
+  origin.bits[2] = 0b00000000000000000000000000000000;
+  origin.bits[3] = 0b10000000000000000000000000000000;
+  int check = st_is_equal(origin, result);
+    ck_assert_int_eq(1, check);
+    ck_assert_int_eq(code_check, code);
+#test st_int_to_dec_5
+  st_decimal origin;
+   int code_check = 0; int code =0;
+  // src1 = 200;
+
+  int num = 200;
+
+  st_decimal result; code = st_from_int_to_decimal(num, &result);
+  origin.bits[0] = 0b00000000000000000000000011001000;
+  origin.bits[1] = 0b00000000000000000000000000000000;
+  origin.bits[2] = 0b00000000000000000000000000000000;
+  origin.bits[3] = 0b00000000000000000000000000000000;
+  int check = st_is_equal(origin, result);
+    ck_assert_int_eq(1, check);
+    ck_assert_int_eq(code_check, code);
+#test st_int_to_dec_6
+  st_decimal origin;
+   int code_check = 0; int code =0;
+  // src1 = -200;
+
+  int num = -200;
+
+  st_decimal result; code = st_from_int_to_decimal(num, &result);
+  origin.bits[0] = 0b00000000000000000000000011001000;
+  origin.bits[1] = 0b00000000000000000000000000000000;
+  origin.bits[2] = 0b00000000000000000000000000000000;
+  origin.bits[3] = 0b10000000000000000000000000000000;
+  int check = st_is_equal(origin, result);
+    ck_assert_int_eq(1, check);
+    ck_assert_int_eq(code_check, code);
+#test st_int_to_dec_7
+  st_decimal origin;
+   int code_check = 0; int code =0;
+  // src1 = 0;
+
+  int num = 0;
+
+  st_decimal result; code = st_from_int_to_decimal(num, &result);
+  origin.bits[0] = 0b00000000000000000000000000000000;
+  origin.bits[1] = 0b00000000000000000000000000000000;
+  origin.bits[2] = 0b00000000000000000000000000000000;
+  origin.bits[3] = 0b00000000000000000000000000000000;
+  int check = st_is_equal(origin, result);
+    ck_assert_int_eq(1, check);
+    ck_assert_int_eq(code_check, code);
+#test st_int_to_dec_8
+st_decimal origin;
+   int code_check = 0; int code =0;
+  // src1 = 0;
+
+  int num = 0;
+
+  st_decimal result; code = st_from_int_to_decimal(num, &result);
+  origin.bits[0] = 0b00000000000000000000000000000000;
+  origin.bits[1] = 0b00000000000000000000000000000000;
+  origin.bits[2] = 0b00000000000000000000000000000000;
+  origin.bits[3] = 0b00000000000000000000000000000000;
+  int check = st_is_equal(origin, result);
+    ck_assert_int_eq(1, check);
+    ck_assert_int_eq(code_check, code);
+#test st_int_to_dec_9
+  st_decimal origin;
+   int code_check = 0; int code =0;
+  // src1 = 999999;
+
+  int num = 999999;
+
+  st_decimal result; code = st_from_int_to_decimal(num, &result);
+  origin.bits[0] = 0b00000000000011110100001000111111;
+  origin.bits[1] = 0b00000000000000000000000000000000;
+  origin.bits[2] = 0b00000000000000000000000000000000;
+  origin.bits[3] = 0b00000000000000000000000000000000;
+  int check = st_is_equal(origin, result);
+    ck_assert_int_eq(1, check);
+    ck_assert_int_eq(code_check, code);
+#test st_int_to_dec_10
+  st_decimal origin;
+   int code_check = 0; int code =0;
+  // src1 = -999999;
+
+  int num = -999999;
+
+  st_decimal result; code = st_from_int_to_decimal(num, &result);
+  origin.bits[0] = 0b00000000000011110100001000111111;
+  origin.bits[1] = 0b00000000000000000000000000000000;
+  origin.bits[2] = 0b00000000000000000000000000000000;
+  origin.bits[3] = 0b10000000000000000000000000000000;
+  int check = st_is_equal(origin, result);
+    ck_assert_int_eq(1, check);
+    ck_assert_int_eq(code_check, code);
+#test st_int_to_dec_11
+  st_decimal origin;
+   int code_check = 0; int code =0;
+  // src1 = 2147483647;
+
+  int num = 2147483647;
+
+  st_decimal result; code = st_from_int_to_decimal(num, &result);
+  origin.bits[0] = 0b01111111111111111111111111111111;
+  origin.bits[1] = 0b00000000000000000000000000000000;
+  origin.bits[2] = 0b00000000000000000000000000000000;
+  origin.bits[3] = 0b00000000000000000000000000000000;
+  int check = st_is_equal(origin, result);
+    ck_assert_int_eq(1, check);
+    ck_assert_int_eq(code_check, code);
+#test st_int_to_dec_12
+  st_decimal origin;
+   int code_check = 0; int code =0;
+  // src1 = -2147483648;
+
+  int num = -2147483648;
+
+  st_decimal result; code = st_from_int_to_decimal(num, &result);
+  origin.bits[0] = 0b10000000000000000000000000000000;
+  origin.bits[1] = 0b00000000000000000000000000000000;
+  origin.bits[2] = 0b00000000000000000000000000000000;
+  origin.bits[3] = 0b10000000000000000000000000000000;
+  int check = st_is_equal(origin, result);
+    ck_assert_int_eq(1, check);
+    ck_assert_int_eq(code_check, code);
+#test st_int_to_dec_13
+st_decimal origin;
+   int code_check = 0; int code =0;
+  // src1 = 1;
+
+  int num = 1;
+
+  st_decimal result; code = st_from_int_to_decimal(num, &result);
+  origin.bits[0] = 0b00000000000000000000000000000001;
+  origin.bits[1] = 0b00000000000000000000000000000000;
+  origin.bits[2] = 0b00000000000000000000000000000000;
+  origin.bits[3] = 0b00000000000000000000000000000000;
+  int check = st_is_equal(origin, result);
+    ck_assert_int_eq(1, check);
+    ck_assert_int_eq(code_check, code);
+#test st_int_to_dec_14
+  st_decimal origin;
+   int code_check = 0; int code =0;
+  // src1 = -1;
+
+  int num = -1;
+
+  st_decimal result; code = st_from_int_to_decimal(num, &result);
+  origin.bits[0] = 0b00000000000000000000000000000001;
+  origin.bits[1] = 0b00000000000000000000000000000000;
+  origin.bits[2] = 0b00000000000000000000000000000000;
+  origin.bits[3] = 0b10000000000000000000000000000000;
+  int check = st_is_equal(origin, result);
+    ck_assert_int_eq(1, check);
+    ck_assert_int_eq(code_check, code);
