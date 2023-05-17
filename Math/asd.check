@@ -1,0 +1,610 @@
+#include <math.h>
+#include "st_math.h"
+
+#test abs1
+int value = 0;
+ck_assert_int_eq(abs(value), st_abs(value));
+
+#test abs2
+int value = 276447231;
+ck_assert_int_eq(abs(value), st_abs(value));
+
+#test abs3
+int value = -276447231;
+ck_assert_int_eq(abs(value), st_abs(value));
+
+#test fabs0
+double value = -0;
+ck_assert_ldouble_eq_tol(st_fabs(value), fabs(value), 1e-7);
+
+#test fabs1
+double value = 0;
+ck_assert_ldouble_eq_tol(st_fabs(value), fabs(value), 1e-7);
+
+#test fabs2
+double value = 1;
+ck_assert_ldouble_eq_tol(st_fabs(value), fabs(value), 1e-7);
+
+#test fabs3
+double value = 12345678;
+ck_assert_ldouble_eq_tol(st_fabs(value), fabs(value), 1e-7);
+
+#test fabs4
+double value = -65432100;
+ck_assert_ldouble_eq_tol(st_fabs(value), fabs(value), 1e-7);
+
+#test fabs5
+double value = 0.12345678;
+ck_assert_ldouble_eq_tol(st_fabs(value), fabs(value), 1e-7);
+
+#test fabs6
+double value = -0.65432100;
+ck_assert_ldouble_eq_tol(st_fabs(value), fabs(value), 1e-7);
+
+#test fabs7
+ck_assert_double_nan(st_fabs(st_NAN));
+
+#test fabs8
+ck_assert_double_infinite(st_fabs(st_INF));
+
+#test fabs9
+ck_assert_double_infinite(st_fabs(-st_INF));
+
+#test ceil1
+double a = 0;
+ck_assert_ldouble_eq_tol(st_ceil(a), ceil(a), 1e-7);
+double b = -0;
+ck_assert_ldouble_eq_tol(st_ceil(b), ceil(b), 1e-7);
+
+#test ceil2
+double value = 0.00000001;
+ck_assert_ldouble_eq_tol(st_ceil(value), ceil(value), 1e-7);
+
+#test ceil3
+double value = -0.00000001;
+ck_assert_ldouble_eq_tol(st_ceil(value), ceil(value), 1e-7);
+
+#test ceil4
+double value = 0.99999999;
+ck_assert_ldouble_eq_tol(st_ceil(value), ceil(value), 1e-7);
+
+#test ceil5
+double value = -0.99999999;
+ck_assert_ldouble_eq_tol(st_ceil(value), ceil(value), 1e-7);
+
+#test ceil6
+double value = 33.12345678;
+ck_assert_ldouble_eq_tol(st_ceil(value), ceil(value), 1e-7);
+
+#test ceil7
+double value = -64.65432100;
+ck_assert_ldouble_eq_tol(st_ceil(value), ceil(value), 1e-7);
+
+#test ceil8
+ck_assert_double_nan(st_ceil(st_NAN));
+
+#test ceil9
+ck_assert_double_infinite(st_ceil(st_INF));
+
+#test ceil10
+ck_assert_double_infinite(st_ceil(-st_INF));
+
+
+#test floor1
+double a = 0;
+ck_assert_ldouble_eq_tol(st_floor(a), floor(a), 1e-7);
+double b = -0;
+ck_assert_ldouble_eq_tol(st_floor(b), floor(b), 1e-7);
+
+#test floor2
+double value = 0.00000001;
+ck_assert_ldouble_eq_tol(st_floor(value), floor(value), 1e-7);
+
+#test floor3
+double value = -0.00000001;
+ck_assert_ldouble_eq_tol(st_floor(value), floor(value), 1e-7);
+
+#test floor4
+double value = 0.99999999;
+ck_assert_ldouble_eq_tol(st_floor(value), floor(value), 1e-7);
+
+#test floor5
+double value = -0.99999999;
+ck_assert_ldouble_eq_tol(st_floor(value), floor(value), 1e-7);
+
+#test floor6
+double value = 33.12345678;
+ck_assert_ldouble_eq_tol(st_floor(value), floor(value), 1e-7);
+
+#test floor7
+double value = -64.65432100;
+ck_assert_ldouble_eq_tol(st_floor(value), floor(value), 1e-7);
+
+#test floor8
+ck_assert_double_infinite(st_floor(st_INF));
+
+#test floor9
+ck_assert_double_nan(st_floor(st_NAN));
+
+#test floor10
+ck_assert_double_infinite(st_floor(-st_INF));
+
+#test sqrt0
+double value = -0;
+ck_assert_ldouble_eq_tol(st_sqrt(value), sqrt(value), 1e-7);
+
+#test sqrt1
+double value = 0;
+ck_assert_ldouble_eq_tol(st_sqrt(value), sqrt(value), 1e-7);
+
+#test sqrt2
+double value = 16.;
+ck_assert_ldouble_eq_tol(st_sqrt(value), sqrt(value), 1e-7);
+
+#test sqrt3
+double value = 123456;
+ck_assert_ldouble_eq_tol(st_sqrt(value), sqrt(value), 1e-7);
+
+#test sqrt4
+double value = 0.123456;
+ck_assert_ldouble_eq_tol(st_sqrt(value), sqrt(value), 1e-7);
+
+#test sqrt5
+double value = 0.999999;
+ck_assert_ldouble_eq_tol(st_sqrt(value), sqrt(value), 1e-7);
+
+#test sqrt6
+double value = -50;
+ck_assert_int_eq(st_sqrt(value) == NAN, sqrt(value) == NAN);
+
+#test sqrt7
+for (double i = 0; i <= 1000; i++)
+    ck_assert_ldouble_eq_tol(st_sqrt(i), sqrt(i), 1e-7);
+
+#test sqrt8
+ck_assert_double_nan(st_sqrt(st_NAN));
+
+#test sqrt9
+ck_assert_double_infinite(st_sqrt(st_INF));
+
+#test sqrt10
+ck_assert_double_nan(sqrt(-st_INF));
+ck_assert_double_nan(st_sqrt(-st_INF));
+
+
+
+
+#test exp_1
+double value = 0;
+ck_assert_ldouble_eq_tol(st_exp(value), exp(value), 1e-7);
+
+#test exp_2
+double value = 1;
+ck_assert_ldouble_eq_tol(st_exp(value), exp(value), 1e-7);
+
+#test exp_3
+double value = 0.123456;
+ck_assert_ldouble_eq_tol(st_exp(value), exp(value), 1e-7);
+
+#test exp_4
+double value = -0.654321;
+ck_assert_ldouble_eq_tol(st_exp(value), exp(value), 1e-7);
+
+#test exp_5
+double value = 0.999999;
+ck_assert_ldouble_eq_tol(st_exp(value), exp(value), 1e-7);
+
+#test exp_6
+double value = 123456;
+ck_assert_ldouble_eq(st_exp(value), exp(value));
+
+#test exp_7
+double value = -654321;
+ck_assert_ldouble_eq_tol(st_exp(value), exp(value), 1e-7);
+
+#test exp_8
+for (double i = -10; i < 10; i++)
+ck_assert_ldouble_eq_tol(st_exp(i), exp(i), 1e-7);
+
+#test exp_9
+double value = -st_INF;
+ck_assert_ldouble_eq_tol(st_exp(value), exp(value), 1e-7);
+
+#test exp_10
+double value = st_INF;
+ck_assert_double_infinite(st_exp(value));
+
+#test exp_11
+double value = st_NAN;
+ck_assert_ldouble_nan(st_exp(value));
+
+#test fmod0
+ck_assert_ldouble_eq_tol(st_fmod(-0, 3.7), fmod(-0, 3.7), 1e-7);
+
+#test fmod1
+ck_assert_ldouble_eq_tol(st_fmod(456.87678, 3.7), fmod(456.87678, 3.7), 1e-7);
+
+#test fmod2
+ck_assert_ldouble_eq_tol(st_fmod(36677.546546, 4.1), fmod(36677.546546, 4.1), 1e-7);
+
+#test fmod3
+ck_assert_ldouble_eq_tol(st_fmod(23.456, -4.355), fmod(23.456, -4.355), 1e-7);
+
+#test fmod4
+ck_assert_ldouble_nan(st_fmod(0., 0.));
+
+#test fmod5
+ck_assert_ldouble_eq_tol(st_fmod(0, 3.7), fmod(0, 3.7), 1e-7);
+
+#test fmod6
+ck_assert_ldouble_nan(st_fmod(st_INF, st_NAN));
+
+#test fmod7
+ck_assert_ldouble_eq_tol(st_fmod(36677.546546, st_INF), fmod(36677.546546, st_INF), 1e-7);
+
+#test fmod8
+ck_assert_ldouble_nan(st_fmod(4.5, st_NAN));
+
+#test fmod9
+ck_assert_ldouble_nan(st_fmod(st_NAN, 4.5));
+
+
+#test sin1
+double value = 0;
+ck_assert_ldouble_eq_tol(st_sin(value), sin(value), 1e-7);
+
+#test sin2
+double value = 1.5;
+ck_assert_ldouble_eq_tol(st_sin(value), sin(value), 1e-7);
+
+#test sin3
+double value = -2;
+ck_assert_ldouble_eq_tol(st_sin(value), sin(value), 1e-7);
+
+#test sin4
+double value = -20;
+ck_assert_ldouble_eq_tol(st_sin(value), sin(value), 1e-7);
+
+#test sin5
+double value = 20;
+ck_assert_ldouble_eq_tol(st_sin(value), sin(value), 1e-7);
+
+#test sin6
+ck_assert_ldouble_nan(st_sin(st_NAN));
+
+#test sin7
+ck_assert_ldouble_nan(st_sin(st_INF));
+
+#test sin8
+ck_assert_ldouble_nan(st_sin(-st_INF));
+
+#test cos1
+double value = 0;
+ck_assert_ldouble_eq_tol(st_cos(value), cos(value), 1e-7);
+
+#test cos2
+double value = -20;
+ck_assert_ldouble_eq_tol(st_cos(value), cos(value), 1e-7);
+
+#test cos3
+double value = 20;
+ck_assert_ldouble_eq_tol(st_cos(value), cos(value), 1e-7);
+
+#test cos4
+ck_assert_ldouble_nan(st_cos(st_INF));
+
+#test cos5
+ck_assert_ldouble_nan(st_cos(-st_INF));
+
+#test cos6
+double value = 1.432;
+ck_assert_ldouble_eq_tol(st_cos(value), cos(value), 1e-7);
+
+#test cos7
+ck_assert_ldouble_nan(st_cos(st_NAN));
+
+
+#test tan1
+double value = 0;
+ck_assert_ldouble_eq_tol(st_tan(value), tan(value), 1e-7);
+
+#test tan2
+double value = 1.534;
+ck_assert_ldouble_eq_tol(st_tan(value), tan(value), 1e-7);
+
+#test tan3
+ck_assert_ldouble_nan(st_tan(st_NAN));
+
+#test tan4
+ck_assert_ldouble_nan(st_tan(st_INF));
+
+#test tan5
+ck_assert_ldouble_nan(st_tan(-st_INF));
+
+#test tan6
+double value = -1.534;
+ck_assert_ldouble_eq_tol(st_tan(value), tan(value), 1e-7);
+
+#test tan7
+double value = -20;
+ck_assert_ldouble_eq_tol(st_tan(value), tan(value), 1e-7);
+
+#test tan8
+double value = 20;
+ck_assert_ldouble_eq_tol(st_tan(value), tan(value), 1e-7);
+
+#test atan1
+double value = 0;
+ck_assert_ldouble_eq_tol(st_atan(value), atan(value), 1e-7);
+
+#test atan3
+double value = 1.5;
+ck_assert_double_eq_tol(st_atan(value), atan(value), 1e-7);
+
+#test atan4
+double value = -20;
+ck_assert_double_eq_tol(st_atan(value), atan(value), 1e-7);
+
+#test atan5
+double value = 20;
+ck_assert_double_eq_tol(st_atan(value), atan(value), 1e-7);
+
+#test atan6
+double value = st_INF;
+ck_assert_double_eq_tol(st_atan(value), atan(value), 1e-7);
+
+#test atan7
+double value = -st_INF;
+ck_assert_double_eq_tol(st_atan(value), atan(value), 1e-7);
+
+#test atan8
+ck_assert_ldouble_nan(st_atan(st_NAN));
+
+#test atan9
+double value = -1.5;
+ck_assert_double_eq_tol(st_atan(value), atan(value), 1e-7);
+
+#test asin1
+double value = 0;
+ck_assert_ldouble_eq_tol(st_asin(value), asin(value), 1e-7);
+
+#test asin3
+double value = 0.5123;
+ck_assert_ldouble_eq_tol(st_asin(value), asin(value), 1e-7);
+
+#test asin4
+double value = -0.5123;
+ck_assert_ldouble_eq_tol(st_asin(value), asin(value), 1e-7);
+
+#test asin5
+double value = 1;
+ck_assert_ldouble_eq_tol(st_asin(value), asin(value), 1e-7);
+
+#test asin6
+double value = -1;
+ck_assert_ldouble_eq_tol(st_asin(value), asin(value), 1e-7);
+
+#test asin7
+double value = 20;
+ck_assert_ldouble_nan(st_asin(value));
+
+#test asin8
+double value = -20;
+ck_assert_ldouble_nan(st_asin(value));
+
+#test asin9
+double value = st_NAN;
+ck_assert_ldouble_nan(st_asin(value));
+
+#test acos1
+double value = 0;
+ck_assert_ldouble_eq_tol(st_acos(value), acos(value), 1e-7);
+
+#test acos2
+double value = 1;
+ck_assert_ldouble_eq_tol(st_acos(value), acos(value), 1e-7);
+
+#test acos3
+double value = -1;
+ck_assert_ldouble_eq_tol(st_acos(value), acos(value), 1e-7);
+
+#test acos4
+double value = 20;
+ck_assert_ldouble_nan(st_acos(value));
+
+#test acos5
+double value = -20;
+ck_assert_ldouble_nan(st_acos(value));
+
+#test acos6
+ck_assert_ldouble_nan(st_acos(st_NAN));
+
+#test log1
+double value = 0;
+ck_assert_double_infinite(st_log(value));
+
+#test log_2
+double value = 1;
+ck_assert_ldouble_eq_tol(st_log(value), log(value), 1e-7);
+
+#test log3
+double value = 0.123456;
+ck_assert_ldouble_eq_tol(st_exp(value), exp(value), 1e-7);
+
+#test log4
+double value = -0.654321;
+ck_assert_ldouble_nan(st_log(value));
+
+#test log5
+double value = 0.999999;
+ck_assert_ldouble_eq_tol(st_log(value), log(value), 1e-7);
+
+#test log6
+double value = 123456;
+ck_assert_ldouble_eq_tol(st_log(value), log(value), 1e-7);
+
+#test log7
+double value = -654321;
+ck_assert_ldouble_nan(st_log(value));
+
+#test log8
+double value = -st_INF;
+ck_assert_ldouble_nan(st_log(value));
+
+#test log9
+double value = st_INF;
+ck_assert_double_infinite(st_log(value));
+
+#test log_10
+double value = st_NAN;
+ck_assert_ldouble_nan(st_log(value));
+
+#test pow1
+double base = 0;
+double exp = -3;
+ck_assert_double_infinite(st_pow(base, exp));
+
+#test pow2
+double base = 0;
+double exp = -st_INF;
+ck_assert_double_infinite(st_pow(base, exp));
+
+#test pow3
+double base = 0;
+double exp = 1.345;
+ck_assert_ldouble_eq_tol(st_pow(base, exp), pow(base, exp), 1e-7);
+
+#test pow4
+double base = 0;
+double exp = 1.345;
+ck_assert_ldouble_eq_tol(st_pow(base, exp), pow(base, exp), 1e-7);
+
+#test pow5
+double base = -1;
+double exp = st_INF;
+ck_assert_ldouble_eq_tol(st_pow(base, exp), pow(base, exp), 1e-7);
+
+#test pow6
+double base = 1;
+double exp = 123;
+ck_assert_ldouble_eq_tol(st_pow(base, exp), pow(base, exp), 1e-7);
+
+#test pow7
+double base = 1;
+double exp = st_NAN;
+ck_assert_ldouble_eq_tol(st_pow(base, exp), pow(base, exp), 1e-7);
+
+#test pow8
+double base = st_NAN;
+double exp = 0;
+ck_assert_ldouble_eq_tol(st_pow(base, exp), pow(base, exp), 1e-7);
+
+#test pow9
+double base = -254;
+double exp = 0;
+ck_assert_ldouble_eq_tol(st_pow(base, exp), pow(base, exp), 1e-7);
+
+#test pow10
+double base = -254;
+double exp = 1.345;
+ck_assert_ldouble_nan(st_pow(base, exp));
+
+#test pow11
+double base = 0.5;
+double exp = -st_INF;
+ck_assert_double_infinite(st_pow(base, exp));
+
+#test pow12
+double base = -0.45;
+double exp = -st_INF;
+ck_assert_double_infinite(st_pow(base, exp));
+
+#test pow13
+double base = -1234.5;
+double exp = -st_INF;
+ck_assert_ldouble_eq_tol(st_pow(base, exp), pow(base, exp), 1e-7);
+
+#test pow14
+double base = 1234.5;
+double exp = -st_INF;
+ck_assert_ldouble_eq_tol(st_pow(base, exp), pow(base, exp), 1e-7);
+
+#test pow15
+double base = 0.5;
+double exp = -st_INF;
+ck_assert_double_infinite(st_pow(base, exp));
+
+#test pow16
+double base = -0.45;
+double exp = -st_INF;
+ck_assert_double_infinite(st_pow(base, exp));
+
+#test pow17
+double base = -1234.5;
+double exp = -st_INF;
+ck_assert_ldouble_eq_tol(st_pow(base, exp), pow(base, exp), 1e-7);
+
+#test pow18
+double base = 1234.5;
+double exp = -st_INF;
+ck_assert_ldouble_eq_tol(st_pow(base, exp), pow(base, exp), 1e-7);
+
+#test pow19
+double base = -st_INF;
+double exp = -23.43;
+ck_assert_ldouble_eq_tol(st_pow(base, exp), pow(base, exp), 1e-7);
+
+#test pow20
+double base = -st_INF;
+double exp = -2;
+ck_assert_ldouble_eq_tol(st_pow(base, exp), pow(base, exp), 1e-7);
+
+#test pow21
+double base = -st_INF;
+double exp = 123;
+ck_assert_double_infinite(st_pow(base, exp));
+
+#test pow22
+double base = -st_INF;
+double exp = 123.345;
+ck_assert_double_infinite(st_pow(base, exp));
+
+#test pow23
+double base = st_INF;
+double exp = 12;
+ck_assert_double_infinite(st_pow(base, exp));
+
+#test pow24
+double base = st_INF;
+double exp = 12;
+ck_assert_double_infinite(st_pow(base, exp));
+
+#test pow25
+double base = st_NAN;
+double exp = 12;
+ck_assert_ldouble_nan(st_pow(base, exp));
+
+#test pow26
+double base = 21;
+double exp = st_NAN;
+ck_assert_ldouble_nan(st_pow(base, exp));
+
+#test pow27
+double base = st_NAN;
+double exp = st_NAN;
+ck_assert_ldouble_nan(st_pow(base, exp));
+
+#test pow28
+double base = -1;
+double exp = -st_NAN;
+ck_assert_ldouble_nan(st_pow(base, exp));
+
+#test pow29
+double base = 0.5;
+double exp = st_INF;
+ck_assert_ldouble_eq_tol(st_pow(base, exp), pow(base, exp), 1e-7);
+
+#test pow30
+double base = 123;
+double exp = st_INF;
+ck_assert_double_infinite(st_pow(base, exp));
