@@ -22,8 +22,7 @@ typedef struct {
 //  1000 0000 >> 1 = 1100 0000  -- char
 //  1000 0000 >> 1 = 0100 0000  -- unsigned char
 */
-// cannot open source file "math.h". Please run the 'Select IntelliSense
-// Configuration...' command to locate your system headers.
+
 typedef struct {
   unsigned char digit[60];
   int scale;
@@ -69,7 +68,6 @@ void ft_multiply_by_ten(st_decimal *dec);  // ?
 void ft_divide_by_ten(st_decimal *dec);    // ?
 
 int senoir_number_bcd(bcd_t bcd1);
-// int    ft_normalization(st_decimal *dec1, st_decimal *dec2);
 void ft_normalization_equal_scale(bcd_t *bcd1, bcd_t *bcd2);
 
 int st_from_int_to_decimal(int src, st_decimal *dst);

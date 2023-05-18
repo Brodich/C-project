@@ -112,15 +112,11 @@ int st_from_float_to_decimal(float src, st_decimal *dst) {
 int st_from_decimal_to_float(st_decimal src, float *dst) {
   double fl = 0;
   bcd_t bcd1 = {0};
-  // int ten_scale = 1;        - не уверен почему так, но на моем маке с ними не
-  // запускается (Ваня)
   ft_from_dec_to_bcd(src, &bcd1);
   int count_digit = senoir_number_bcd(bcd1);
 
   while (count_digit >= 0) {
     fl = fl + bcd1.digit[count_digit] * pow(10, count_digit);
-    // ten_scale++; не уверен почему так, но на моем маке с ними не запускается
-    // (Ваня)
     count_digit--;
   }
 
